@@ -1,10 +1,11 @@
 local BONES = {
---[[SKEL_L_Calf]]	63931,
---[[SKEL_R_Calf]]	36864,
---[[SKEL_L_Thigh]]	58271,
---[[SKEL_R_Thigh]]	51826,
---[[SKEL_Pelvis]]	11816
+--[[SKEL_L_Calf]]	[63931] = true,
+--[[SKEL_R_Calf]]	[36864] = true,
+--[[SKEL_L_Thigh]]	[58271] = true,
+--[[SKEL_R_Thigh]]	[51826] = true,
+--[[SKEL_Pelvis]]	[11816] = true
 }
+
 Citizen.CreateThread(function()
 	local ped = PlayerPedId()
 	SetPedMinGroundTimeForStungun(ped, 15000)
@@ -24,6 +25,6 @@ function Disarm(ped)
 	local hit, bone = GetPedLastDamageBone(ped)
 
 	if BONES[bone] then
-		SetPedToRagdoll(ped, 5000, 5000, 0, 0, 0, 0)
+		SetPedToRagdoll(ped, 10000, 10000, 0, 0, 0, 0)
 	end
 end
