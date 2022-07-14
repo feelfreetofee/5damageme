@@ -7,10 +7,10 @@ local BONES = {
 }
 
 Citizen.CreateThread(function()
-	local ped = PlayerPedId()
 	SetPedMinGroundTimeForStungun(ped, 15000)
 	while true do Wait(0)
-		if HasEntityBeenDamagedByAnyPed(ped) then
+		if HasEntityBeenDamagedByAnyPed(PlayerPedId()) then
+			ped = PlayerPedId()
 			Disarm(ped)
 			ClearEntityLastWeaponDamage(ped)
 			ClearEntityLastDamageEntity(ped)
