@@ -7,19 +7,18 @@ local BONES = {
 }
 
 Citizen.CreateThread(function()
-	SetPedMinGroundTimeForStungun(ped, 15000)
+
 	while true do Wait(0)
 		if HasEntityBeenDamagedByAnyPed(PlayerPedId()) then
-			ped = PlayerPedId()
-			Disarm(ped)
-			ClearEntityLastWeaponDamage(ped)
-			ClearEntityLastDamageEntity(ped)
+			Disarm()
 		end
 	end
 end)
 
 
-function Disarm(ped)
+function Disarm()
+	local ped = PlayerPedId()
+
 	if IsEntityDead(ped) or HasEntityBeenDamagedByWeapon(ped, -1569615261, 0) then return false end
 	
 	local hit, bone = GetPedLastDamageBone(ped)
@@ -27,4 +26,9 @@ function Disarm(ped)
 	if BONES[bone] then
 		SetPedToRagdoll(ped, 10000, 10000, 0, 0, 0, 0)
 	end
+	
+	ClearEntityLastWeaponDamage(ped)
+	ClearEntityLastDamageEntity(ped)
+
+	SetPedMinGroundTimeForStungun(ped, 15000)
 end
